@@ -12,6 +12,7 @@ app.use(cors())
 app.use(express.json());
 connectDB();
 
+app.use('/',welcomRoutes);
 app.use('/auth',authRoutes);
 app.use('/users',usersRoutes);
 app.use('/posts',postRoutes);
