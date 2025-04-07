@@ -3,6 +3,6 @@ import { getAllPosts,addPost, getPostCount } from '../Controllers/postsControlle
 
 export const postRoutes=express.Router();
 
-postRoutes.get('/allPosts',getAllPosts);
-postRoutes.post('/addpost',addPost);
-postRoutes.get('/postCount/:email',getPostCount)
+postRoutes.get('/',getAllPosts);
+postRoutes.post('/',addPost);
+postRoutes.get('/postCount/:email',getPostCount);

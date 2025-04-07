@@ -8,6 +8,7 @@ const userPosts = mongoose.Schema(
         },
         postUrl: {
             type: String,
+            trim:true,
         },
         email: {
             type: String,

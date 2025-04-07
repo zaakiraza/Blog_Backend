@@ -31,25 +31,25 @@ export const addPost = async (req, res) => {
     const isEmail = await users.findOne({ email: posterEmail });
     try {
         if (!postText || isEmail.email != posterEmail || !posterName || !posterImgUrl) {
-            res.status(400).json({
-                status: false,
-                message: "feilds are missing"
-            })
+            return (
+                res.status(400).json({
+                    status: false,
+                    message: "feilds are missing"
+                }))
         }
-        else {
-            let doc = new UserPosts({
-                text: postText,
-                postUrl: postImgUrl,
-                email: posterEmail,
-                name: posterName,
-                ImgUrl: posterImgUrl
-            })
-            await doc.save();
-            return res.status(200).json({
-                status: true,
-                message: "Posted successfully",
-            })
-        }
+        let doc = new UserPosts({
+            text: postText,
+            postUrl: postImgUrl,
+            email: posterEmail,
+            name: posterName,
+            ImgUrl: posterImgUrl
+        })
+        await doc.save();
+        return res.status(200).json({
+            status: true,
+            message: "Posted successfully",
+        })
+
     }
     catch (e) {
         res.status(400).json({

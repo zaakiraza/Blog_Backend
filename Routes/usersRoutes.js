@@ -3,6 +3,6 @@ import { getAllUsers,getSingleUser,deleteUser } from '../Controllers/usersContro
 
 export const usersRoutes=express.Router();
 
-usersRoutes.get('/allUsers',getAllUsers);
+usersRoutes.get('/',getAllUsers);
 usersRoutes.get('/:email',getSingleUser);
 usersRoutes.delete('/:email',deleteUser);
