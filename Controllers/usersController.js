@@ -45,27 +45,70 @@ export const getSingleUser = async (req, res) => {
 
 export const deleteUser = async (req, res) => {
     const currentEmail = req.params.email;
-    try{
+    try {
         const deleteResult = await users.deleteOne({ email: currentEmail })
         // const deleteResult = await users.deleteOne({ currentEmail });
         console.log(deleteResult)
-        if(deleteResult.deletedCount == 0){
+        if (deleteResult.deletedCount == 0) {
             res.status(404).json({
-                status:false,
-                message:"user not found"
+                status: false,
+                message: "user not found"
             })
         }
-        else{
+        else {
             res.status(200).json({
-                status:true,
-                message:"user deleted successfully"
+                status: true,
+                message: "user deleted successfully"
             })
         }
     }
-    catch(e){
+    catch (e) {
         res.status(400).json({
-            status:false,
-            message:e
+            status: false,
+            message: e
         })
     }
+}
+
+export const deleteAllUsers = async (req, res) => { }
+
+
+export const changePassword = async (req, res) => {
+    const { resetEmail, resetPassword, confirmPassword } = req.body;
+    try {
+        const userData = await users.findOne({ email: resetEmail });
+        if (!userData) {
+            res.status(404).json({
+                status: false,
+                message: "Email doesn't exist"
+            })
+        }
+        else {
+            if (userData.password != resetPassword) {
+                res.status(400).json({
+                    status: false,
+                    message: "Wrong Password"
+                })
+            }
+            else {
+                const updateResult = await users.updateOne({ email: resetEmail }, { $set: { password: confirmPassword } }, { runValidators: true });
+                res.status(200).json({
+                    status: true,
+                    message: "Password Updated"
+                })
+            }
+        }
+    }
+    catch (e) {
+        res.status(400).json({
+            status: false,
+            message: e
+        })
+    }
+}
+
+export const updateUser = async (req, res) => {
+    let requestedEmail = req.params.email;
+    console.log(requestedEmail);
+    console.log(req.body);
 }

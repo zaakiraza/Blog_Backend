@@ -20,8 +20,8 @@ export const signupController = async (req, res) => {
             let doc = new users({
                 name: signupName,
                 email: signupEmail,
-                imgUrl:signupImgURL,
-                description:signUpDes,
+                imgUrl: signupImgURL,
+                description: signUpDes,
                 password: signupPassword,
             })
             await doc.save();
@@ -73,36 +73,4 @@ export const loginController = async (req, res) => {
     }
 }
 
-export const changePassword = async (req, res) => {
-    const { resetEmail, resetPassword, confirmPassword } = req.body;
-    try {
-        const userData = await users.findOne({ email: resetEmail });
-        if (!userData) {
-            res.status(404).json({
-                status: false,
-                message: "Email doesn't exist"
-            })
-        }
-        else {
-            if (userData.password != resetPassword) {
-                res.status(400).json({
-                    status: false,
-                    message: "Wrong Password"
-                })
-            }
-            else {
-                const updateResult = await users.updateOne({ email: resetEmail }, { $set: { password: confirmPassword } }, { runValidators: true });
-                res.status(200).json({
-                    status: true,
-                    message: "Password Updated"
-                })
-            }
-        }
-    }
-    catch (e) {
-        res.status(400).json({
-            status: false,
-            message: e
-        })
-    }
-}
+export const forgetPassword = async (req, res) => { }

@@ -26,6 +26,26 @@ export const getAllPosts = async (req, res) => {
     }
 }
 
+export const singleUserPosts = async (req, res) => { }
+
+export const getAllPostCount = async (req, res) => { }
+
+export const singleUserPostCount = async (req, res) => {
+    try {
+        const posts = await UserPosts.find({ email: req.params.email });
+        res.status(200).json({
+            status: true,
+            postCount: posts.length
+        })
+    }
+    catch (e) {
+        res.status(400).json({
+            status: false,
+            message: e
+        })
+    }
+}
+
 export const addPost = async (req, res) => {
     const { postText, postImgUrl, posterEmail, posterName, posterImgUrl } = req.body;
     const isEmail = await users.findOne({ email: posterEmail });
@@ -59,18 +79,6 @@ export const addPost = async (req, res) => {
     }
 }
 
-export const getPostCount = async (req, res) => {
-    try {
-        const posts = await UserPosts.find({ email: req.params.email });
-        res.status(200).json({
-            status: true,
-            postCount: posts.length
-        })
-    }
-    catch (e) {
-        res.status(400).json({
-            status: false,
-            message: e
-        })
-    }
-}
+export const deleteAllPosts = async (req, res) => { }
+
+export const deleteSinglePost = async (req, res) => { }

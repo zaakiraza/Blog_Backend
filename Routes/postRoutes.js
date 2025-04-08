@@ -1,8 +1,12 @@
 import express from 'express'
-import { getAllPosts,addPost, getPostCount } from '../Controllers/postsController.js';
+import { getAllPosts, singleUserPosts, getAllPostCount, singleUserPostCount, addPost, deleteAllPosts, deleteSinglePost } from '../Controllers/postsController.js';
 
-export const postRoutes=express.Router();
+export const postRoutes = express.Router();
 
-postRoutes.get('/',getAllPosts);
-postRoutes.post('/',addPost);
-postRoutes.get('/postCount/:email',getPostCount);
+postRoutes.get('/', getAllPosts);
+postRoutes.get('/:email', singleUserPosts)
+postRoutes.get('/postCount/', getAllPostCount);
+postRoutes.get('/postCount/:email', singleUserPostCount);
+postRoutes.post('/', addPost);
+postRoutes.delete('/', deleteAllPosts);
+postRoutes.delete('/:email', deleteSinglePost);
