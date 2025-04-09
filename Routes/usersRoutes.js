@@ -8,4 +8,4 @@ usersRoutes.get('/:email', getSingleUser);
 usersRoutes.delete('/', deleteAllUsers);
 usersRoutes.delete('/:email', deleteUser);
 usersRoutes.put('/reset/:id', changePassword);
-usersRoutes.put('/:email', updateUser);
+usersRoutes.patch('/:email', updateUser);

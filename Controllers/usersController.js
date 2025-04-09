@@ -109,6 +109,26 @@ export const changePassword = async (req, res) => {
 
 export const updateUser = async (req, res) => {
     let requestedEmail = req.params.email;
-    console.log(requestedEmail);
-    console.log(req.body);
+    const { updatedName, updatedDes, updatedImgURL } = req.body;
+    try {
+        const userData = await users.findOneAndUpdate(
+            { email: requestedEmail },
+            {
+                $set: {
+                    name: updatedName,
+                    description: updatedDes,
+                    imgUrl: updatedImgURL
+                }
+            },
+            { new: true }
+        );
+
+        if (!userData) {
+            return res.status(404).json({ message: "User not found" });
+        }
+        res.status(200).json({ message: "User updated successfully", userData });
+    }
+    catch (error) {
+        res.status(500).json({ message: "Server error", error });
+    }
 }
