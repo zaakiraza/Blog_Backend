@@ -1,4 +1,5 @@
 import users from "../Models/users.js";
+import { genSalt, hash} from 'bcrypt'
 
 export const getAllUsers = async (req, res) => {
     try {
@@ -113,7 +114,8 @@ export const changePassword = async (req, res) => {
                 })
             }
             else {
-                const updateResult = await users.updateOne({ email: resetEmail }, { $set: { password: confirmPassword } }, { runValidators: true });
+                const salt = await genSalt(10);
+                const updateResult = await users.updateOne({ email: resetEmail }, { $set: { password: await hash(confirmPassword, salt) } }, { runValidators: true });
                 res.status(200).json({
                     status: true,
                     message: "Password Updated"

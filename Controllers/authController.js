@@ -17,7 +17,7 @@ export const checkForAlreadyPresentEmail = async (req, res) => {
         }
         const dbEmails = await users.findOne({ email: signupEmail });
         if (!dbEmails) {
-            return res.json({
+            return res.status(200).json({
                 status: true,
                 message: "Email not found"
             })

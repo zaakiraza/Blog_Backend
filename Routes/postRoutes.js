@@ -7,6 +7,6 @@ postRoutes.get('/allPost', getAllPosts);
 postRoutes.get('/singleUserPost/:email', singleUserPosts);
 postRoutes.get('/postCount', getAllPostCount);
 postRoutes.get('/singlePostCount/:email', singleUserPostCount);
-postRoutes.post('/', addPost);
+postRoutes.post('/:token', addPost);
 postRoutes.delete('/deleteAll', deleteAllPosts);
 postRoutes.delete('/deleteSingle/:email', deleteSinglePost);
