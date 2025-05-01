@@ -1,5 +1,5 @@
 import users from "../Models/users.js";
-import { genSalt, hash} from 'bcrypt'
+import { genSalt, hash } from 'bcrypt'
 
 export const getAllUsers = async (req, res) => {
     try {
@@ -49,7 +49,7 @@ export const getSingleUserByName = async (req, res) => {
     try {
         let isName = await users.findOne({ name: findName });
         if (isName) {
-            return  res.json({
+            return res.json({
                 status: false,
                 message: "Name already taken"
             });
@@ -92,9 +92,6 @@ export const deleteUser = async (req, res) => {
         })
     }
 }
-
-export const deleteAllUsers = async (req, res) => { }
-
 
 export const changePassword = async (req, res) => {
     const { resetEmail, resetPassword, confirmPassword } = req.body;

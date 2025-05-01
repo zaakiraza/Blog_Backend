@@ -128,8 +128,6 @@ export const addPost = async (req, res) => {
     }
 }
 
-export const deleteAllPosts = async (req, res) => { }
-
 export const deleteSinglePost = async (req, res) => {
     //     const currentEmail = req.params.email;
     //     try {
